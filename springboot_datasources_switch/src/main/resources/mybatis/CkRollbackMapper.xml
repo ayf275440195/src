@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ayf.springboot_datasources_switch.mapper.CkRollbackMapper" >
+  <resultMap id="BaseResultMap" type="com.ayf.springboot_datasources_switch.entity.CkRollback" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="ShipId" property="shipid" jdbcType="INTEGER" />
+    <result column="POrderId" property="porderid" jdbcType="VARCHAR" />
+    <result column="ProductId" property="productid" jdbcType="INTEGER" />
+    <result column="Estate" property="estate" jdbcType="TINYINT" />
+    <result column="Operator" property="operator" jdbcType="INTEGER" />
+    <result column="operating_time" property="operatingTime" jdbcType="TIMESTAMP" />
+    <result column="Reason" property="reason" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ayf.springboot_datasources_switch.entity.CkRollback" extends="BaseResultMap" >
+    <result column="Remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, ShipId, POrderId, ProductId, Estate, Operator, operating_time, Reason
+  </sql>
+  <sql id="Blob_Column_List" >
+    Remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ck_rollback
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ck_rollback
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ayf.springboot_datasources_switch.entity.CkRollback" >
+    insert into ck_rollback (Id, ShipId, POrderId, 
+      ProductId, Estate, Operator, 
+      operating_time, Reason, Remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{shipid,jdbcType=INTEGER}, #{porderid,jdbcType=VARCHAR}, 
+      #{productid,jdbcType=INTEGER}, #{estate,jdbcType=TINYINT}, #{operator,jdbcType=INTEGER}, 
+      #{operatingTime,jdbcType=TIMESTAMP}, #{reason,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ayf.springboot_datasources_switch.entity.CkRollback" >
+    insert into ck_rollback
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="shipid != null" >
+        ShipId,
+      </if>
+      <if test="porderid != null" >
+        POrderId,
+      </if>
+      <if test="productid != null" >
+        ProductId,
+      </if>
+      <if test="estate != null" >
+        Estate,
+      </if>
+      <if test="operator != null" >
+        Operator,
+      </if>
+      <if test="operatingTime != null" >
+        operating_time,
+      </if>
+      <if test="reason != null" >
+        Reason,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="shipid != null" >
+        #{shipid,jdbcType=INTEGER},
+      </if>
+      <if test="porderid != null" >
+        #{porderid,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="estate != null" >
+        #{estate,jdbcType=TINYINT},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="operatingTime != null" >
+        #{operatingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ayf.springboot_datasources_switch.entity.CkRollback" >
+    update ck_rollback
+    <set >
+      <if test="shipid != null" >
+        ShipId = #{shipid,jdbcType=INTEGER},
+      </if>
+      <if test="porderid != null" >
+        POrderId = #{porderid,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        ProductId = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="estate != null" >
+        Estate = #{estate,jdbcType=TINYINT},
+      </if>
+      <if test="operator != null" >
+        Operator = #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="operatingTime != null" >
+        operating_time = #{operatingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reason != null" >
+        Reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ayf.springboot_datasources_switch.entity.CkRollback" >
+    update ck_rollback
+    set ShipId = #{shipid,jdbcType=INTEGER},
+      POrderId = #{porderid,jdbcType=VARCHAR},
+      ProductId = #{productid,jdbcType=INTEGER},
+      Estate = #{estate,jdbcType=TINYINT},
+      Operator = #{operator,jdbcType=INTEGER},
+      operating_time = #{operatingTime,jdbcType=TIMESTAMP},
+      Reason = #{reason,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=LONGVARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ayf.springboot_datasources_switch.entity.CkRollback" >
+    update ck_rollback
+    set ShipId = #{shipid,jdbcType=INTEGER},
+      POrderId = #{porderid,jdbcType=VARCHAR},
+      ProductId = #{productid,jdbcType=INTEGER},
+      Estate = #{estate,jdbcType=TINYINT},
+      Operator = #{operator,jdbcType=INTEGER},
+      operating_time = #{operatingTime,jdbcType=TIMESTAMP},
+      Reason = #{reason,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from ck_rollback
+  </select>
+</mapper>
